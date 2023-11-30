@@ -25,18 +25,27 @@ export const TasksList = (props: TasksListProps) => {
     }
   };
 
-  if (!tasks.length) return null;
-
   return (
     <Box>
       <Typography mb="0.5rem" variant="h2">
         {title}
       </Typography>
-      <ul style={{ listStyle: "none" }}>
-        {tasks.map((task) => (
-          <TaskListItem key={task.id} task={task} onChange={handleChangeTask} />
-        ))}
-      </ul>
+      {tasks.length > 0 ? (
+        <ul style={{ listStyle: "none" }}>
+          {tasks.map((task) => (
+            <TaskListItem
+              key={task.id}
+              task={task}
+              onChange={handleChangeTask}
+            />
+          ))}
+        </ul>
+      ) : (
+        <Typography>
+          No hay tareas {title.toLocaleLowerCase()}{" "}
+          {title === "Pendientes" ? "¡Buen trabajo! 🔥🚀" : ""}
+        </Typography>
+      )}
     </Box>
   );
 };
